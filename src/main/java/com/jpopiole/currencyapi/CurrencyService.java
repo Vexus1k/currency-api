@@ -1,6 +1,9 @@
 package com.jpopiole.currencyapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,8 +22,9 @@ public class CurrencyService {
         this.restTemplate = restTemplate;
     }
 
-    public List<CurrencyRequestEntity> getAllCurrencyRequests() {
-        return currencyRepository.findAll();
+    public List<CurrencyRequestEntity> getAllCurrencyRequests(Integer page) {
+        Pageable pageable = PageRequest.of(page - 1, 3);
+        return currencyRepository.findAll(pageable).getContent();
     }
 
     public CurrencyResponse getCurrentCurrencyValue(CurrencyRequest request) throws CurrencyNotFoundException {

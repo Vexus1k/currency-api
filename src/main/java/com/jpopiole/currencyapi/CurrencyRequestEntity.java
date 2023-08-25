@@ -1,5 +1,7 @@
 package com.jpopiole.currencyapi;
 
+import org.springframework.data.domain.Page;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
